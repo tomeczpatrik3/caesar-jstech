@@ -1,0 +1,15 @@
+Step 1. Install React Bootstrap and Bootstrap from NPM.
+
+npm install react-bootstrap --save
+npm install bootstrap --save
+
+Step 2. Import Bootstrap CSS and optionally Bootstrap theme CSS in the index.js file.
+
+import './index.css';
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/css/bootstrap-theme.css';
+
+Step 3. Import required React Bootstrap components within App.js file or your custom component file.
+
+import React, { Component } from 'react';
+import { Navbar, Jumbotron, Button } from 'react-bootstrap';
