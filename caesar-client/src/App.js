@@ -7,6 +7,7 @@ import {
 } from 'react-router-dom'
 
 import KeyComponent from './components/key-component';
+import CodingComponent from './components/coding-component';
 
 import './App.css';
 
@@ -16,6 +17,7 @@ class App extends React.Component {
       <Router>
         <Switch>
           <Route path="/key" component={KeyComponent} />
+          <Route path="/coding" component={CodingComponent} />
           <Route render={() => (<Redirect to="/key" />)} />
         </Switch>
       </Router>
