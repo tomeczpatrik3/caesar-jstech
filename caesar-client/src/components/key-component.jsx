@@ -8,6 +8,42 @@ import FormControl from 'react-bootstrap/lib/FormControl';
 
 export default class KeyComponent extends React.Component {
     
+    constructor() {
+        super();
+        this.state = {
+          secret_key: '',
+        };
+    }
+
+    /**
+     * A state-ben található tikos kulcs frissítése
+     * @param {*} e 
+     */
+    onSecretKeyInput(e) {
+        this.setState({
+            secret_key: e.target.value,
+        });
+    }
+    
+    /**
+     * Submitolás esetén:
+     * @param {*} e 
+     */
+    onSubmit(e) {
+        e.preventDefault();
+
+        console.log(this.state.secret_key);
+    
+        /*
+        login(this.state)
+            .then(() => {
+                this.props.history.push('/coding');
+            })
+            .catch(console.log);
+        */    
+       this.props.history.push('/coding');
+    }
+
     render() {
         return (
             <div>
@@ -15,10 +51,10 @@ export default class KeyComponent extends React.Component {
                     <h2>Titkos kulcs megadása</h2>
                     <strong>Kérlek add meg a titkos kulcsot a folytatáshoz!</strong>
                 </Alert>
-                <form>
+                <form onSubmit={e => this.onSubmit(e)}>
                     <FormGroup controlId="formControlsTextarea">
                         <ControlLabel><strong>Kulcs:</strong></ControlLabel>
-                        <FormControl componentClass="textarea" />
+                        <FormControl componentClass="textarea" onChange={e => this.onSecretKeyInput(e)}/>
                     </FormGroup>
                 
                     <Button bsStyle="primary" type="submit">OK</Button>

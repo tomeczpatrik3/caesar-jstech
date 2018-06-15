@@ -16,9 +16,9 @@ class App extends React.Component {
     return (
       <Router>
         <Switch>
-          <Route path="/key" component={KeyComponent} />
+          <Route path="/enter-secret-key" component={KeyComponent} />
           <Route path="/coding" component={CodingComponent} />
-          <Route render={() => (<Redirect to="/key" />)} />
+          <Route render={() => (<Redirect to="/enter-secret-key" />)} />
         </Switch>
       </Router>
     );
