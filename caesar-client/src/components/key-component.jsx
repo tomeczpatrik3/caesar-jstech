@@ -26,22 +26,16 @@ export default class KeyComponent extends React.Component {
     }
     
     /**
-     * Submitolás esetén:
+     * Submitolás esetén eltároljuk a localStorage-ben a kapott eltolást hosszt:
      * @param {*} e 
      */
     onSubmit(e) {
         e.preventDefault();
 
-        console.log(this.state.secret_key);
-    
-        /*
-        login(this.state)
-            .then(() => {
-                this.props.history.push('/coding');
-            })
-            .catch(console.log);
-        */    
-       this.props.history.push('/coding');
+        //console.log(this.state.secret_key);
+        localStorage.setItem('offset', '10');
+        
+        this.props.history.push('/coding');
     }
 
     render() {

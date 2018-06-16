@@ -1,7 +1,7 @@
-export function sendSecretKey(secretObj) {
-    return fetch('/login', {
-      method: 'POST',
-      body: JSON.stringify(loginObj),
+  export function getOffset(key) {
+    return fetch(`/getOffset/${key}`, {
+      method: 'GET',
       credentials: 'same-origin',
-    });
+    })
+    .then(res => res.json());
   }
