@@ -1,11 +1,20 @@
-export function getOffset(str) {
-    var offset = 0;
+class OffsetGenerator {
 
-	for (var i = 0; i < str.length; i ++) {
-		offset += str.charCodeAt(i);
-    }
+    /**
+     * Az eltolást generáló függvény:
+     * @param {} str 
+     */
+    getOffset(str) {
+        var offset = 0;
     
-    offset = (offset % 26);
-
-	return offset;
-};
+        for (var i = 0; i < str.length; i ++) {
+            offset += str.charCodeAt(i);
+        }
+        
+        offset = (offset % 26);
+    
+        return offset;
+    };
+  }
+  
+  module.exports = OffsetGenerator;

@@ -1,50 +1,72 @@
-export function encode(str, amount) {
-    var output = '';
-
-	for (var i = 0; i < str.length; i ++) {
-		var c = str[i];
-        
-        if (c.match(/[a-z]/i)) {
-            var code = str.charCodeAt(i);
-            
-			if ((code >= 65) && (code <= 90))
-				c = String.fromCharCode(((code - 65 + amount) % 26) + 65);
-
-			else if ((code >= 97) && (code <= 122))
-				c = String.fromCharCode(((code - 97 + amount) % 26) + 97);
-
+	/**
+	 * ÁBÉCÉ lekérdezése:
+	 */
+	function getAlphabet() {
+		return [
+			'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h',
+			'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p',
+			'q', 'r', 's', 't', 'u', 'v', 'w', 'x',
+			'y', 'z', '0', '1', '2', '3', '4', '5',
+			'6', '7', '8', '9', 'A', 'B', 'C', 'D',
+			'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L',
+			'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T',
+			'U', 'V', 'W', 'X', 'Y', 'Z', '!', '@',
+			'#', '$', '%', '^', '&', '(', ')', '+',
+			'-', '*', '/', '[', ']', '{', '}', '=',
+			'<', '>', '?', '_', '"', '.', ',', ' ',
+		];
+	}
+	
+	/**
+	 * A kódolásért felelős függvény:
+	 * @param {*} str 
+	 * @param {*} amount 
+	 */
+	export function encode(text, shift) {
+		var alphabet = getAlphabet();
+		var offset = parseInt(shift, 10);
+		var result = "";
+		
+		for (var i = 0; i < text.length; i++) {
+			var index = alphabet.indexOf(text[i]);
+			
+			if (index === -1) { //Ha nincs ilyen karakter az ÁBÉCÉBEN, akkor marad önmaga
+				result += text[i];
+			}
+			else { //Ha van, akkor eltoljuk shittel (mod abécé mérete)
+				result += alphabet[ (index+offset)%alphabet.length ];
+			}
 		}
-
-		output += c;
-
+		return result;
 	}
 
-	return output;
-};
-
-export function decode(str, amount)  { 
-    var output = '';
-
-	for (var i = 0; i < str.length; i ++) {
-		var c = str[i];
-        
-        if (c.match(/[a-z]/i)) {
-            var code = str.charCodeAt(i);
-            
-			if ((code >= 65) && (code <= 90))
-				c = String.fromCharCode(((code - 65 - amount) % 26) + 65);
-
-			else if ((code >= 97) && (code <= 122))
-				c = String.fromCharCode(((code - 97 - amount) % 26) + 97);
-
+	/**
+	 * A dekódolástért felelős függvény:
+	 * @param {*} str 
+	 * @param {*} amount 
+	 */
+	export function decode(text, shift) {
+		var alphabet = getAlphabet();
+		var offset = parseInt(shift, 10);
+		var result = "";
+		
+		for (var i = 0; i < text.length; i++) {
+			var index = alphabet.indexOf(text[i]);
+			
+			if (index === -1) { //Ha nincs ilyen karakter az ÁBÉCÉBEN, akkor marad önmaga
+				result += text[i];
+			}
+			else { //Ha van, akkor eltoljuk:
+				var newIndex = alphabet.indexOf(text[i])-offset;
+				if (newIndex>=0) 
+					result += alphabet[ newIndex ];
+				else
+					result += alphabet[ alphabet.length+newIndex ];
+			}
 		}
-
-		output += c;
-
+		return result;
 	}
 
-	return output;
-};
 
 
 

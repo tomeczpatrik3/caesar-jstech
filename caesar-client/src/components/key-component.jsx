@@ -6,6 +6,8 @@ import FormGroup from 'react-bootstrap/lib/FormGroup';
 import ControlLabel from 'react-bootstrap/lib/ControlLabel';
 import FormControl from 'react-bootstrap/lib/FormControl';
 
+import { getOffset } from '../utils/api';
+
 export default class KeyComponent extends React.Component {
     
     constructor() {
@@ -31,11 +33,13 @@ export default class KeyComponent extends React.Component {
      */
     onSubmit(e) {
         e.preventDefault();
-
-        //console.log(this.state.secret_key);
-        localStorage.setItem('offset', '10');
         
-        this.props.history.push('/coding');
+        getOffset(this.state.secret_key)
+        .then((res) => {
+            localStorage.setItem('offset', res['offset']);
+            this.props.history.push('/coding');
+        })
+        .catch(console.log);
     }
 
     render() {
